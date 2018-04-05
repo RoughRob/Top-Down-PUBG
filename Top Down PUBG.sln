@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Top Down PUBG", "Top Down PUBG.csproj", "{6D4CF14C-0BF4-3DEE-0547-BB9AFD61114A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Top Down PUBG.Plugins", "Top Down PUBG.Plugins.csproj", "{FEDE8579-B749-BF7D-8457-EAC154227452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Top Down PUBG.Editor.Plugins", "Top Down PUBG.Editor.Plugins.csproj", "{DAE1EFBC-540F-DC3F-0BBB-7E23D9AC1B70}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Top Down PUBG.Editor", "Top Down PUBG.Editor.csproj", "{09767DD8-4371-8730-74D3-409FE3986FEB}"
 EndProject
 Global
@@ -15,6 +19,14 @@ Global
 		{6D4CF14C-0BF4-3DEE-0547-BB9AFD61114A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D4CF14C-0BF4-3DEE-0547-BB9AFD61114A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D4CF14C-0BF4-3DEE-0547-BB9AFD61114A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDE8579-B749-BF7D-8457-EAC154227452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDE8579-B749-BF7D-8457-EAC154227452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDE8579-B749-BF7D-8457-EAC154227452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDE8579-B749-BF7D-8457-EAC154227452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE1EFBC-540F-DC3F-0BBB-7E23D9AC1B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE1EFBC-540F-DC3F-0BBB-7E23D9AC1B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE1EFBC-540F-DC3F-0BBB-7E23D9AC1B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE1EFBC-540F-DC3F-0BBB-7E23D9AC1B70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09767DD8-4371-8730-74D3-409FE3986FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09767DD8-4371-8730-74D3-409FE3986FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09767DD8-4371-8730-74D3-409FE3986FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
