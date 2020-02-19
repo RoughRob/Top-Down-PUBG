@@ -31,6 +31,10 @@ public class ItemPickUp : MonoBehaviour {
 
     public bool fullInventory;
 
+    public  GameObject Assault;
+    public  GameObject ShotGun;
+    public  GameObject Pistol;
+
 
     private void Start()
     {
@@ -228,14 +232,23 @@ public class ItemPickUp : MonoBehaviour {
         if (name == "Assault Rifle")
         {
             Gun.assault = true;
+            Assault.SetActive(true);
+            Pistol.SetActive(false);
+            ShotGun.SetActive(false);
         }
         else if (name == "Pistol")
         {
             Gun.pistol = true;
+            Pistol.SetActive(true);
+            Assault.SetActive(false);
+            ShotGun.SetActive(false);
         }
         else if (name == "Shotgun")
         {
             Gun.shotgun = true;
+            ShotGun.SetActive(true);
+            Assault.SetActive(false);
+            Pistol.SetActive(false);
         }
     }
 

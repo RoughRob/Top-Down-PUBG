@@ -1,11 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Gun : MonoBehaviour {
+public class Gun : NetworkBehaviour {
 
     public bool isFiring;
     public bool wideFire;
+
+    public AudioClip AssualtSound;
+    public AudioClip ShotGunSound;
+    public AudioClip PistolSound;
+    public AudioSource GunSounds;
 
     public bool scoped;
     public GameObject NormalView;
@@ -21,7 +26,7 @@ public class Gun : MonoBehaviour {
     public static float bulletSpeed;
     public static float range;
 
-    public static float timeBetweenShots;
+
     private float shotCounter;
 
     public Transform fireFrom;
@@ -34,23 +39,41 @@ public class Gun : MonoBehaviour {
     public static bool shotgun;
 
 
+    /// //////////////////////
+    public static float damage = 10f;
+    public float assaultDmg = 15;
+    public float pistolDmg = 10;
+    public float shotGunDmg = 30;
+    public ParticleSystem muzzleFlash;
+    public static float fireRate = 15f;
+    public float nextTimeToFire = 0f;
+
+    public PlayerWeapon weapon;
+
+    [SerializeField]
+    private LayerMask mask;
+
+    private const string PLAYER_TAG = "Player";
+    /// //////////////////////
+
+
     // Use this for initialization
-    void Start () {
+    void Start() {
         range = 20;
-        timeBetweenShots = 10;
         bulletSpeed = 100;
 
+        GunSounds = GetComponent<AudioSource>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
         WeponType();
 
-        Fire();
+        //Fire();
 
-	}
+    }
 
     void WeponType()
     {
@@ -58,17 +81,24 @@ public class Gun : MonoBehaviour {
         wideFire = false;
         if (assault == true)
         {
-            timeBetweenShots = .1f;
+            fireRate = 10f;
             bulletSpeed = 100;
-            if (Input.GetMouseButton(0))
+            damage = assaultDmg;
+            GunSounds.clip = AssualtSound;
+            if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire)
             {
                 isFiring = true;
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Fire();
+                //GunSounds.Play();
+
             }
             else
             {
                 isFiring = false;
+                Fire();
             }
-              ///Scope
+            ///Scope
             if (Input.GetMouseButton(1))
             {
                 ScopeX2();
@@ -81,14 +111,20 @@ public class Gun : MonoBehaviour {
         }
         else if (pistol == true)
         {
+            fireRate = 5f;
             bulletSpeed = 100;
-            if (Input.GetMouseButtonDown(0))
+            damage = pistolDmg;
+            GunSounds.clip = PistolSound;
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextTimeToFire)
             {
                 isFiring = true;
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Fire();
             }
             else
             {
                 isFiring = false;
+                Fire();
             }
             if (Input.GetMouseButton(1))
             {
@@ -102,14 +138,19 @@ public class Gun : MonoBehaviour {
         else if (shotgun == true)
         {
             bulletSpeed = 50;
-
-            if (Input.GetMouseButtonDown(0))
+            fireRate = 1f;
+            GunSounds.clip = ShotGunSound;
+            damage = shotGunDmg;
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextTimeToFire)
             {
                 wideFire = true;
+                nextTimeToFire = Time.time + 1f / fireRate;
+                Fire();
             }
             else
             {
                 wideFire = false;
+                Fire();
             }
         }
         else
@@ -120,32 +161,43 @@ public class Gun : MonoBehaviour {
 
     void Fire()
     {
+
+
         if (isFiring)
         {
+
             shotCounter -= Time.deltaTime;
             if (shotCounter <= 0)
             {
-                shotCounter = timeBetweenShots;
-                Bullet newBullet = Instantiate(bullet, fireFrom.position, fireFrom.rotation);
-                newBullet.fireSpeed = bulletSpeed;
+                GunSounds.Play();
+                muzzleFlash.Play();
+                shotCounter = fireRate;
+                Shoot();
+                //Bullet newBullet = Instantiate(bullet, fireFrom.position, fireFrom.rotation);
+                //Debug.Log("bullet");
+                //newBullet.fireSpeed = bulletSpeed;
+
             }
         }
         else if (wideFire)
         {
+            muzzleFlash.Play();
             shotCounter -= Time.deltaTime;
             if (shotCounter <= 0)
             {
-                shotCounter = timeBetweenShots;
-                
-                Bullet newBullet2 = Instantiate(bullet, fireFrom.position, Right.rotation);
-                Bullet newBullet5 = Instantiate(bullet, fireFrom.position, fireFrom.rotation);
-                Bullet newBullet4 = Instantiate(bullet, fireFrom.position, Left.rotation);
-                
-               // newBullet1.fireSpeed = bulletSpeed;
-                newBullet2.fireSpeed = bulletSpeed;
-                newBullet5.fireSpeed = bulletSpeed;
+                GunSounds.Play();
+                shotCounter = fireRate;
+
+                Shoot();
+                // Bullet newBullet2 = Instantiate(bullet, fireFrom.position, Right.rotation);
+                //Bullet newBullet5 = Instantiate(bullet, fireFrom.position, fireFrom.rotation);
+                // Bullet newBullet4 = Instantiate(bullet, fireFrom.position, Left.rotation);
+
+                // newBullet1.fireSpeed = bulletSpeed;
+                //newBullet2.fireSpeed = bulletSpeed;
+                //newBullet5.fireSpeed = bulletSpeed;
                 //newBullet3.fireSpeed = bulletSpeed;
-                newBullet4.fireSpeed = bulletSpeed;
+                //newBullet4.fireSpeed = bulletSpeed;
             }
         }
         else
@@ -173,6 +225,28 @@ public class Gun : MonoBehaviour {
     {
         view.transform.position = NormalView.transform.position;
         FieldOfView.viewAngle = normal;
+    }
+
+    [Client]
+    void Shoot()
+    {
+        RaycastHit _hit;
+            if(Physics.Raycast(fireFrom.transform.position,fireFrom.transform.forward, out _hit, weapon.range, mask))
+            {
+            // Debug.Log("We hit " + _hit.collider.name);
+            // if(_hit.collider.tag == PLAYER_TAG)
+            // {
+
+            Debug.Log("We hit " + _hit.collider.name);
+                CmdPlayerhit("a");
+           // }
+            }
+    }
+
+    //[Command]
+    void CmdPlayerhit(string _ID)
+    {
+        Debug.Log(_ID + " Has been shot");
     }
 
 }

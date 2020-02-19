@@ -17,8 +17,8 @@ TagManager:
   - Obstacles
   - Targets
   - Invisible Tragets
-  - 
-  - 
+  - LocalPlayer
+  - RemotePlayer
   - 
   - 
   - 
