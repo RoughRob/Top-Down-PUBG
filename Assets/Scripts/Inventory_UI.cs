@@ -7,12 +7,13 @@ public class Inventory_UI : MonoBehaviour {
     Inventory inventory;
 
 
-   Slot[] slots;
-    Slot activeSlot;
+   public static Slot[] slots;
+    public static Slot activeSlot;
 
 	// Use this for initialization
 	void Start () {
         inventory = Inventory.instance;
+        //slots[0].active = true;
         inventory.onItemChangedCallBack += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<Slot>();
@@ -24,48 +25,65 @@ public class Inventory_UI : MonoBehaviour {
 
         if (Input.GetKeyDown("1"))
         {
-            clearSelect();
+
+
             slots[0].SetSlotActive();
+            activeSlot = slots[0];
+            clearSelect(0);
         }
         if (Input.GetKeyDown("2"))
         {
-            clearSelect();
             slots[1].SetSlotActive();
+            activeSlot = slots[1];
+            clearSelect(1);
         }
         if (Input.GetKeyDown("3"))
         {
-            clearSelect();
+
             slots[2].SetSlotActive();
+            activeSlot = slots[2];
+            clearSelect(2);
         }
         if (Input.GetKeyDown("4"))
         {
-            clearSelect();
             slots[3].SetSlotActive();
+            activeSlot = slots[3];
+            clearSelect(3);
         }
         if (Input.GetKeyDown("5"))
         {
-            clearSelect();
+
             slots[4].SetSlotActive();
+            activeSlot = slots[4];
+            clearSelect(4);
         }
 
 
         if (Input.GetKeyDown("c"))
         {
-            foreach(Slot s in slots)
-            {
-                if (s.active == true)
-                    s.SlotDropItem();
-            }
+            //foreach(Slot s in slots)
+            //{
+            //    if (s.active == true)
+            //        s.SlotDropItem();
+            //}
 
+            activeSlot.SlotDropItem();
+
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            activeSlot.SlotUseItem();
         }
 
     }
 
     void UpdateUI()
     {
-        for(int i = 0; i < slots.Length; i++)
+        for(int i = 0; i < inventory.items.Length; i++)
         {
-            if(i < inventory.items.Count)
+            //if(i < inventory.items.Length)
+            if (inventory.items[i] != null)
             {
                 slots[i].AddItem(inventory.items[i]);
             }
@@ -76,10 +94,11 @@ public class Inventory_UI : MonoBehaviour {
         }
     }
 
-    void clearSelect()
+    void clearSelect(int skip)
     {
         for (int i = 0; i < slots.Length; i++)
         {
+            if(i != skip)
             slots[i].SetSlotUnactive();
         }
     }

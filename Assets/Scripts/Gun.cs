@@ -48,7 +48,8 @@ public class Gun : NetworkBehaviour {
     public static float fireRate = 15f;
     public float nextTimeToFire = 0f;
 
-    public PlayerWeapon weapon;
+    //public PlayerWeapon weapon;
+    public Item weapon;
 
     [SerializeField]
     private LayerMask mask;

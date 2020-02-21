@@ -4,7 +4,8 @@ using UnityEngine.Networking;
 
 public class PlayerShoot : NetworkBehaviour {
 
-    public PlayerWeapon weapon;
+    //public PlayerWeapon weapon;
+    public static Item weapon;
 
     public Transform fireFrom;
 
@@ -18,13 +19,18 @@ public class PlayerShoot : NetworkBehaviour {
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
-        {
+        {                                                
+
+        if (PlayerShoot.weapon == null)
             Shoot();
         }
+
+
+
     }
 
     [Client]
-    void Shoot()
+    public void Shoot()
     {
     RaycastHit _hit;
         if (Physics.Raycast(fireFrom.transform.position, fireFrom.transform.forward, out _hit, weapon.range, mask))

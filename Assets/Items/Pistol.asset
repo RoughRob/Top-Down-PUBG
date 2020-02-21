@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   name: Pistol
+  ItemType: Weapon
   icon: {fileID: 21300000, guid: d5d5f69ce9b13414282db6884b577667, type: 3}
   gameobject: {fileID: 1761431834201228, guid: 0ae3b3bb03e047f438480dd6ed263f3f, type: 2}
   isDefaultItem: 0
-  Active: 1
+  Active: 0
+  damage: 5
+  range: 100
