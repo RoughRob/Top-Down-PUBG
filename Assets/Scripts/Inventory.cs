@@ -61,9 +61,13 @@ public class Inventory : MonoBehaviour {
             //}
 
             Debug.Log("in add " + items.Length.ToString() + " " + items.ToString());
-            if (checkfull())
+            if (checkfull() && Inventory_UI.activeSlot.active == true)
             {
                 Replace(itemX);
+            }
+            else if(checkfull() && Inventory_UI.activeSlot.active == false)
+            {
+
             }
             else
             {
