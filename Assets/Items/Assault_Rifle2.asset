@@ -16,6 +16,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 240f37d473054e643ac7617ba5372987, type: 3}
   gameobject: {fileID: 1471766174056904, guid: 8087af88b02c3504fb3bc758f7bbefa2, type: 2}
   isDefaultItem: 0
-  Active: 0
+  Active: 1
   damage: 20
   range: 50
+  fireRate: 1
+  audioClip: {fileID: 8300000, guid: 53a1a8c18087346d18a02d8a4e0c59ca, type: 3}

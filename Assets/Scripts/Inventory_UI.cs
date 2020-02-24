@@ -17,7 +17,9 @@ public class Inventory_UI : MonoBehaviour {
         inventory.onItemChangedCallBack += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<Slot>();
+        slots[0].SetSlotActive();
         activeSlot = slots[0];
+
     }
 	
 	// Update is called once per frame
@@ -71,10 +73,10 @@ public class Inventory_UI : MonoBehaviour {
 
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            activeSlot.SlotUseItem();
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    activeSlot.SlotUseItem();
+        //}
 
     }
 

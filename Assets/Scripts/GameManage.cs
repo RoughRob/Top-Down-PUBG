@@ -12,7 +12,7 @@ public class GameManage : MonoBehaviour {
     {
         if(instance != null)
         {
-            Debug.LogError("More that one GameManage in scene");
+            Debug.LogError("More than one GameManage in scene");
 
         }
         else

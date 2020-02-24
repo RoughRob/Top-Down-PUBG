@@ -29,8 +29,10 @@ public class Item : ScriptableObject {
     public bool Active = false;
 
     //type Weapon
-    public int damage;
-    public float range;
+    public int damage = 0;
+    public float range = 0;
+    public float fireRate = 0;
+    public AudioClip audioClip;
 
 
 
@@ -38,14 +40,7 @@ public class Item : ScriptableObject {
     {
         Debug.Log("Using" + name);
 
-        if(ItemType == "Weapon")
-        {
-            if(PlayerShoot.weapon == null)
-            PlayerShoot.weapon = this;
-
-            //PlayerShoot.Shoot();
-
-        }
+        
     }
 
     public void DropItem()
@@ -61,11 +56,30 @@ public class Item : ScriptableObject {
     public void SetItemActive()
     {
         Active = true;
+        //if (Inventory.instance.heldItem != null)
+            Destroy(Inventory.instance.heldItem);
+
+        Inventory.instance.heldItem = Instantiate(this.gameobject, Inventory.instance.heldTransform.position , Inventory.instance.heldTransform.rotation);
+        Inventory.instance.heldItem.transform.parent = Inventory.instance.heldTransform;
+
+
+        PlayerShoot playerShoot = Inventory.instance.gameObject.transform.parent.gameObject.GetComponent<PlayerShoot>();
+        if (this.ItemType == "Weapon")
+        {
+            PlayerShoot.weapon = this;
+
+        }
+        else
+        {
+            PlayerShoot.weapon = null;           
+        }
     }
 
     public void SetItemUnactive()
     {
         Active = false;
+        //if (Inventory.instance.heldItem != null)
+           // Destroy(Inventory.instance.heldItem);
     }
 
 

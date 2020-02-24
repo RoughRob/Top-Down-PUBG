@@ -7,6 +7,9 @@ public class Inventory : MonoBehaviour {
     public static Inventory instance;
     public Transform drop;
 
+    public Transform heldTransform;
+    public GameObject heldItem;
+
     #region Singleton
     public void Awake()
     {
@@ -98,7 +101,6 @@ public class Inventory : MonoBehaviour {
         if (itemX == null)
             return false;
 
-;
         Instantiate(itemX.gameobject, drop.position, drop.rotation);
 
 

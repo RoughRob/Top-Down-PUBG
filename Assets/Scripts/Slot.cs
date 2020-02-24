@@ -59,6 +59,10 @@ public class Slot : MonoBehaviour
 
         if (itemX != null)
             itemX.SetItemActive();
+        else
+        {
+            Destroy(Inventory.instance.heldItem);
+        }
 
         active = true;
 
