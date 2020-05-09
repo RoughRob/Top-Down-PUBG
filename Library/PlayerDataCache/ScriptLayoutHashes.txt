@@ -242,7 +242,7 @@ f4b175ffc1eeca85d2783436b4c764a7 Assembly-CSharp-firstpass.dll:UnityStandardAsse
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GunSound
 dc85bc5e5fa1c474858c3ec9e9e26afc Assembly-CSharp.dll:.PlayerShoot
 6746ad828d32ad6e5c07a63950fd4be6 Assembly-CSharp-firstpass.dll:UnityStandardAssets.Water.WaterTile
-da8309889cc3a5cd96250bab8c88b3f9 Assembly-CSharp.dll:.Inventory
+1c0305f62d36934a73edb62dac0286f1 Assembly-CSharp.dll:.Inventory
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp-firstpass.dll:UnityStandardAssets.Utility.FPSCounter
 49ae530e4612d6e276d3515aa7bf234a Assembly-CSharp.dll:.Bullet
 d7947ad7547d0b38199d89b7cf1e9fc3 Assembly-CSharp.dll:.ItemPickUp

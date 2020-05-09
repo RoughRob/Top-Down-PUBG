@@ -7,6 +7,9 @@ public class Inventory : MonoBehaviour {
     public static Inventory instance;
     public Transform drop;
 
+    public Transform heldTransform;
+    public GameObject heldItem;
+
     #region Singleton
     public void Awake()
     {
@@ -61,9 +64,13 @@ public class Inventory : MonoBehaviour {
             //}
 
             Debug.Log("in add " + items.Length.ToString() + " " + items.ToString());
-            if (checkfull())
+            if (checkfull() && Inventory_UI.activeSlot.active == true)
             {
                 Replace(itemX);
+            }
+            else if(checkfull() && Inventory_UI.activeSlot.active == false)
+            {
+
             }
             else
             {
@@ -94,7 +101,6 @@ public class Inventory : MonoBehaviour {
         if (itemX == null)
             return false;
 
-;
         Instantiate(itemX.gameobject, drop.position, drop.rotation);
 
 

@@ -19,3 +19,5 @@ MonoBehaviour:
   Active: 0
   damage: 5
   range: 100
+  fireRate: 5
+  audioClip: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
